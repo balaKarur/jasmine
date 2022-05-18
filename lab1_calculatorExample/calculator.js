@@ -43,8 +43,14 @@ Calculator.prototype.divide = function(number){
 }
 Object.defineProperty(Calculator.prototype,"version",{
     get : function(){
-        return "1.0";
+        return fetch("https://raw.githubusercontent.com/balaKarur/jasmine/main/testdata.json")
+        .then(function(result){
+           return result.json();
+        })
+         .then(function(jsonData){
+            return jsonData.version;
+         })
     },
-   configurable:true,
-   // enumerable:true
+   configurable:true,//to update the version property , to delete version property in object 
+   // enumerable:true//to be visible out side when we are looping
 })

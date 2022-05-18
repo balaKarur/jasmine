@@ -79,6 +79,22 @@ describe("multiplication()",()=>{
   })
 });
 
+describe("get Version",()=>{
+  //done is a callback , it say to jasmin , call has to wait until promise resolved
+  it("fetch verion from the external resources",(done)=>{
+    spyOn(window,'fetch').and.returnValue(Promise.resolve(new Response('{"version":"1.0"}')))
+    calc.version.then(function(version){
+       expect(version).toBe("1.0");
+       done();
+    })
+  })
+  it("fetch verion from the external resources by async and await ", async ()=>{
+    spyOn(window,'fetch').and.returnValue(Promise.resolve(new Response('{"version":"1.0"}')))
+    const version = await calc.version;
+    expect(version).toBe("1.0");
+       
+  })
+})
 /*it("Check is Number typeof",()=>{
 jasmine.addMatchers(customMatcher);
 var a=10;

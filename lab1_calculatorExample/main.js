@@ -1,15 +1,9 @@
-function Calculate(event)
+function Calculate(inputvalue)
 {
     let numberA;
     let numberB;
     let operator;
     cal = new Calculator();
-    let inputvalue = event;
-    if(event.target !== undefined)
-    {
-        console.log("Event :"+event.target.value);
-        inputvalue = event.target.value;
-    }
     
     const expression = /\+|\-|\*|\//;
     var result = 0;
@@ -71,7 +65,9 @@ function showVersion()
     var ele = document.getElementById("version");
     if(ele !== undefined)
     {
-        ele.innerHTML = calObj.version;
+        calObj.version.then(function(version){
+            ele.innerHTML = version;
+        });
     }
     
 }

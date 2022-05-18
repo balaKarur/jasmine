@@ -113,7 +113,7 @@ describe("main.js", () => {
         afterEach(()=>{
             document.body.removeChild(this.documentEle);
         })*/
-        it("Should show version number",()=>{
+        xit("Should show version number_old",()=>{
             var getElespy = spyOn(document,"getElementById").and.returnValue({
                 innerHTML:null
             })
@@ -121,6 +121,20 @@ describe("main.js", () => {
             showVersion();
             expect(spy).toHaveBeenCalled();
             expect(spy()).toBe("1.0")
+        })
+        it("Should show version number",(done)=>{
+            var getElespy = spyOn(document,"getElementById").and.returnValue({
+                innerHTML:null
+            })
+            var spy =spyOnProperty(Calculator.prototype,"version",'get').and.returnValue(Promise.resolve("1.0"));
+            showVersion();
+            expect(spy).toHaveBeenCalled();
+            spy().then(function(verion){
+                //expect(verion).toBe("1.0");
+                expect(getElespy().innerHTML).toBe("1.0");
+                done();
+            });
+            
         })
     })
     /*describe("updateResult()", () => {
